@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">BloodPressureDiary</string>
     <string name="action_settings">Settings</string>
+    <string name="action_print">Print</string>
+    <string name="action_info">Info</string>
+    <string name="action_add">Add</string>
+    <string name="action_export">Export</string>
 </resources>

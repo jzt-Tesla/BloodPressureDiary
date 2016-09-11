@@ -10,9 +10,25 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
  */
 public interface DatabaseAccess
 {
+    /**
+     *
+     * @param item
+     * @return
+     */
     boolean addItem(DataItem item);
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     Collection<? extends DataItem> getAllItemsByType(DataItemType type);
 
+    /**
+     *
+     * @param n
+     * @param type
+     * @return
+     */
     Collection<? extends DataItem> getLastNItemsByType(int n, DataItemType type);
 }

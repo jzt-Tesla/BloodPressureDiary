@@ -6,11 +6,11 @@ package de.asteromania.groehl.bloodpressurediary.domain;
 public class DataItem
 {
 
-    private int date;
+    private long date;
     private double value;
     private DataItemType itemType;
 
-    public DataItem(DataItemType itemType, double value, int date)
+    public DataItem(DataItemType itemType, double value, long date)
     {
         this.itemType = itemType;
         this.value = value;

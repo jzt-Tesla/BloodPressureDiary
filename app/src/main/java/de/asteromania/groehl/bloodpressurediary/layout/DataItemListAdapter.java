@@ -66,6 +66,7 @@ public class DataItemListAdapter extends BaseAdapter
 
         text.setText(dataItems.get(position).getDataItemType().getText());
         value.setText(String.valueOf(dataItems.get(position).getMean()));
+        img.setImageResource(dataItems.get(position).getDataItemTrend().getImage());
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override

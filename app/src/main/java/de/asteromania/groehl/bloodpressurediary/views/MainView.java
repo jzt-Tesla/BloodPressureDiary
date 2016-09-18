@@ -8,10 +8,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import de.asteromania.groehl.bloodpressurediary.R;
+import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
+import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccessDummyImpl;
+import de.asteromania.groehl.bloodpressurediary.database.UserDataAccess;
+import de.asteromania.groehl.bloodpressurediary.database.UserDataAccessDummyImpl;
+import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
+import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
 public class MainView extends AppCompatActivity {
+
+    DatabaseAccess database = new DatabaseAccessDummyImpl();
+    UserDataAccess userData = new UserDataAccessDummyImpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +29,9 @@ public class MainView extends AppCompatActivity {
         setContentView(R.layout.activity_main_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ListView lv=(ListView) findViewById(R.id.listView);
+        lv.setAdapter(new DataItemListAdapter(this, database.getAllItemsByType(DataItemType.SYSTOLE)));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -16,4 +16,16 @@ public class DataItem
         this.value = value;
         this.date = date;
     }
+
+    public long getDate() {
+        return date;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public DataItemType getItemType() {
+        return itemType;
+    }
 }

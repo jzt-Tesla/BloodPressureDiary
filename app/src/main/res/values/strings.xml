@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BloodPressureDiary</string>
+    <string name="app_name">Blood Pressure Diary</string>
     <string name="action_settings">Settings</string>
     <string name="action_print">Print</string>
     <string name="action_info">Info</string>
@@ -11,4 +11,11 @@
     <string name="dataTypeDiastole">Diastole</string>
     <string name="dataTypeHeartRate">Heart Rate</string>
     <string name="dataTypeWeight">Weight</string>
+    <string name="activity_add_data_item">Add Measurement</string>
+    <string name="activity_welcome">Sign in</string>
+    <string name="activity_settings">Settings</string>
+    <string name="activity_info">Information</string>
+    <string name="activity_export">Export</string>
+    <string name="activity_progression">Overview</string>
+    <string name="activity_data_item_choser">Chose Measurement</string>
 </resources>

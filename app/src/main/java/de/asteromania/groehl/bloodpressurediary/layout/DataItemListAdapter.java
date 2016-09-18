@@ -20,6 +20,7 @@ import  de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
 import de.asteromania.groehl.bloodpressurediary.views.AddDataItem;
+import de.asteromania.groehl.bloodpressurediary.views.AddDataItemChoser;
 import de.asteromania.groehl.bloodpressurediary.views.InfoActivity;
 
 /**
@@ -86,9 +87,7 @@ public class DataItemListAdapter extends BaseAdapter
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, AddDataItem.class);
-
-                context.startActivity(intent);
+                context.startActivity(new Intent(context, AddDataItemChoser.class));
             }
         });
         return rowView;

@@ -7,17 +7,25 @@ import de.asteromania.groehl.bloodpressurediary.R;
  */
 public enum DataItemType
 {
-    SYSTOLE(R.string.dataTypeSystole), DIASTOLE(R.string.dataTypeDiastole),
-    HEARTRATE(R.string.dataTypeHeartRate), WEIGHT(R.string.dataTypeWeight);
+    SYSTOLE(R.string.dataTypeSystole, R.layout.activity_add_data_item),
+    DIASTOLE(R.string.dataTypeDiastole, R.layout.activity_add_data_item),
+    HEARTRATE(R.string.dataTypeHeartRate, R.layout.activity_add_data_item),
+    WEIGHT(R.string.dataTypeWeight, R.layout.activity_add_data_item);
 
-    DataItemType(int text)
+    DataItemType(int text, int contentView)
     {
         this.text = text;
+        this.contentView = contentView;
     }
 
     int text;
+    int contentView;
 
     public int getText() {
         return text;
+    }
+
+    public int getContentView() {
+        return contentView;
     }
 }

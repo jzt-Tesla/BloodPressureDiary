@@ -2,6 +2,7 @@ package de.asteromania.groehl.bloodpressurediary.layout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import java.util.Collection;
 import  de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
+import de.asteromania.groehl.bloodpressurediary.views.AddDataItem;
+import de.asteromania.groehl.bloodpressurediary.views.InfoActivity;
 
 /**
  * Created by jgroehl on 18.09.16.
@@ -28,6 +31,7 @@ public class DataItemListAdapter extends BaseAdapter
     private static LayoutInflater inflater=null;
 
     private ArrayList<ListViewItem> dataItems;
+    private Context context;
 
     public DataItemListAdapter(Activity context, Collection<? extends ListViewItem> dataItems) {
 
@@ -36,6 +40,8 @@ public class DataItemListAdapter extends BaseAdapter
 
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        this.context = context;
 
         Log.i(TAG, "Instantiated DataItemListAdapter");
     }
@@ -64,6 +70,15 @@ public class DataItemListAdapter extends BaseAdapter
         ImageView img=(ImageView) rowView.findViewById(R.id.imageViewTrend);
         Button btn = (Button) rowView.findViewById(R.id.buttonInfo);
 
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, InfoActivity.class);
+
+                context.startActivity(intent);
+            }
+        });
+
         text.setText(dataItems.get(position).getDataItemType().getText());
         value.setText(String.valueOf(dataItems.get(position).getMean()));
         img.setImageResource(dataItems.get(position).getDataItemTrend().getImage());
@@ -71,8 +86,9 @@ public class DataItemListAdapter extends BaseAdapter
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(context, AddDataItem.class);
+
+                context.startActivity(intent);
             }
         });
         return rowView;

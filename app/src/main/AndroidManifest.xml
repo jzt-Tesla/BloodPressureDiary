@@ -11,13 +11,21 @@
         <activity
             android:name=".views.MainView"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".views.AddDataItem" />
+        <activity android:name=".views.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".views.WelcomeScreen" />
+        <activity android:name=".views.SettingsActivity" />
+        <activity android:name=".views.InfoActivity" />
+        <activity android:name=".views.ExportActivity" />
+        <activity android:name=".views.ShowProgressionActivity" />
+        <activity android:name=".views.AddDataItemChoser"></activity>
     </application>
 
 </manifest>

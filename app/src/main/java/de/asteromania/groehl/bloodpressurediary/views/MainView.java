@@ -31,7 +31,7 @@ public class MainView extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ListView lv=(ListView) findViewById(R.id.listView);
-        lv.setAdapter(new DataItemListAdapter(this, database.getAllItemsByType(DataItemType.SYSTOLE)));
+        lv.setAdapter(new DataItemListAdapter(this, database.getFloatingMeansOfAllTrackedDataItems()));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

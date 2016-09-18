@@ -7,4 +7,8 @@
     <string name="action_export">Export</string>
     <string name="imageViewTrend">Image showing the current trend</string>
     <string name="oops">Oops..</string>
+    <string name="dataTypeSystole">Systole</string>
+    <string name="dataTypeDiastole">Diastole</string>
+    <string name="dataTypeHeartRate">Heart Rate</string>
+    <string name="dataTypeWeight">Weight</string>
 </resources>

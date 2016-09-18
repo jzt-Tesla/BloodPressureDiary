@@ -17,6 +17,7 @@ import java.util.Collection;
 
 import  de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
+import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
 
 /**
  * Created by jgroehl on 18.09.16.
@@ -26,9 +27,9 @@ public class DataItemListAdapter extends BaseAdapter
     private static final String TAG = "DataItemListAdapter";
     private static LayoutInflater inflater=null;
 
-    private ArrayList<DataItem> dataItems;
+    private ArrayList<ListViewItem> dataItems;
 
-    public DataItemListAdapter(Activity context, Collection<? extends DataItem> dataItems) {
+    public DataItemListAdapter(Activity context, Collection<? extends ListViewItem> dataItems) {
 
         this.dataItems = new ArrayList<>();
         this.dataItems.addAll(dataItems);
@@ -57,13 +58,14 @@ public class DataItemListAdapter extends BaseAdapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         Log.i(TAG, "Called getView");
         View rowView;
-        rowView = inflater.inflate(R.layout.layout_data_item, parent);
+        rowView = inflater.inflate(R.layout.layout_data_item, null);
         TextView text =(TextView) rowView.findViewById(R.id.textViewDataItemText);
         TextView value =(TextView) rowView.findViewById(R.id.textViewDataItemValue);
         ImageView img=(ImageView) rowView.findViewById(R.id.imageViewTrend);
         Button btn = (Button) rowView.findViewById(R.id.buttonInfo);
 
-        text.setText(dataItems.get(position).toString());
+        text.setText(dataItems.get(position).getDataItemType().getText());
+        value.setText(String.valueOf(dataItems.get(position).getMean()));
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override

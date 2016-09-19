@@ -15,17 +15,17 @@ public enum DataItemType
     DataItemType(int text, int contentView)
     {
         this.text = text;
-        this.contentView = contentView;
+        this.addItemView = contentView;
     }
 
     int text;
-    int contentView;
+    int addItemView;
 
     public int getText() {
         return text;
     }
 
-    public int getContentView() {
-        return contentView;
+    public int getAddItemView() {
+        return addItemView;
     }
 }

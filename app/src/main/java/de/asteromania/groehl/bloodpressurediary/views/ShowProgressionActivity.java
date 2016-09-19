@@ -7,6 +7,8 @@ import de.asteromania.groehl.bloodpressurediary.R;
 
 public class ShowProgressionActivity extends AppCompatActivity {
 
+    public static final String EXTRA = "de.asteromania.groehl.bloodpressurediary.ShowProgressionActivity.EXTRA";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

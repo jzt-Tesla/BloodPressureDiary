@@ -29,11 +29,7 @@ public class LaunchActivity extends AppCompatActivity {
             Log.i(TAG, "Starting welcome screen.");
             startActivity(new Intent(this, WelcomeScreen.class));
         }
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         finish();
     }
 }

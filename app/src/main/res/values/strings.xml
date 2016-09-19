@@ -18,4 +18,7 @@
     <string name="activity_export">Export</string>
     <string name="activity_progression">Overview</string>
     <string name="activity_data_item_choser">Chose Measurement</string>
+    <string name="dataTypeBloodPressure">Blood Pressure</string>
+    <string name="date_and_time">Time and Date</string>
+    <string name="dot">.</string>
 </resources>

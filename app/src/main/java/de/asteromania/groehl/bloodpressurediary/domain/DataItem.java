@@ -10,6 +10,12 @@ public class DataItem
     private double value;
     private DataItemType itemType;
 
+    /**
+     *
+     * @param itemType
+     * @param value
+     * @param date
+     */
     public DataItem(DataItemType itemType, double value, long date)
     {
         this.itemType = itemType;

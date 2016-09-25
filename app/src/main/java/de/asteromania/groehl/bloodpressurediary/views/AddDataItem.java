@@ -2,9 +2,15 @@ package de.asteromania.groehl.bloodpressurediary.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.sql.Time;
+import java.util.Calendar;
 
 import de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
@@ -43,9 +49,10 @@ public class AddDataItem extends AppCompatActivity {
 
         setContentView(currentType.getAddItemView());
 
-        DataItem item = (DataItem) database.getLastNItemsByType(1, currentType).toArray()[0];
+        final DataItem item = (DataItem) database.getLastNItemsByType(1, currentType).toArray()[0];
 
-        TextView tv = (TextView) findViewById(R.id.textViewAddTitle);
+        TextView titleView = (TextView) findViewById(R.id.textViewAddTitle);
+        Button buttonAdd = (Button) findViewById(R.id.buttonAdd);
 
         switch(currentType)
         {
@@ -54,8 +61,8 @@ public class AddDataItem extends AppCompatActivity {
                 DataItem systole = (DataItem) database.getLastNItemsByType(1, DataItemType.SYSTOLE).toArray()[0];
                 DataItem diastole = (DataItem) database.getLastNItemsByType(1, DataItemType.DIASTOLE).toArray()[0];
 
-                tv.setText(String.format(getString(R.string.addValue), getString(R.string.dataTypeBloodPressure)));
-                NumberPicker npSystole = (NumberPicker) findViewById(R.id.numberPickerSystole);
+                titleView.setText(String.format(getString(R.string.addValue), getString(R.string.dataTypeBloodPressure)));
+                final NumberPicker npSystole = (NumberPicker) findViewById(R.id.numberPickerSystole);
                 npSystole.setMaxValue(MAX_BP_VALUE);
                 npSystole.setMinValue(MIN_BP_VALUE);
                 if (item != null)
@@ -73,17 +80,26 @@ public class AddDataItem extends AppCompatActivity {
 
                 TextView unit = (TextView) findViewById(R.id.textViewUnitSystole);
                 unit.setText(item.getItemType().getUnitString());
+
+                buttonAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        database.addItem(new DataItem(DataItemType.SYSTOLE, npSystole.getValue(), getCurrentTime()));
+                        database.addItem(new DataItem(DataItemType.DIASTOLE, npSystole.getValue(), getCurrentTime()));
+                        finish();
+                    }
+                });
                 break;
 
             default:
-                NumberPicker npNumber = (NumberPicker) findViewById(R.id.numberPickerNumber);
+                final NumberPicker npNumber = (NumberPicker) findViewById(R.id.numberPickerNumber);
                 npNumber.setMaxValue(MAX_NUMBER_VALUE);
                 npNumber.setMinValue(MIN_NUMBER_VALUE);
                 if (item != null)
                     npNumber.setValue((int) item.getValue());
                 else
                     npNumber.setValue(NUMBER_VALUE);
-                NumberPicker npDecimal = (NumberPicker) findViewById(R.id.numberPickerDecimal);
+                final NumberPicker npDecimal = (NumberPicker) findViewById(R.id.numberPickerDecimal);
                 npDecimal.setMaxValue(MAX_DECIMAL_VALUE);
                 npDecimal.setMinValue(MIN_DECIMAL_VALUE);
                 if (item != null)
@@ -91,20 +107,40 @@ public class AddDataItem extends AppCompatActivity {
                 else
                     npDecimal.setValue(DECIMAL_VALUE);
 
-                tv.setText(String.format(getString(R.string.addValue), getString(item.getItemType().getText())));
+                titleView.setText(String.format(getString(R.string.addValue), getString(item.getItemType().getText())));
 
                 TextView unitNormal = (TextView) findViewById(R.id.textViewUnit);
                 unitNormal.setText(item.getItemType().getUnitString());
+
+                buttonAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        database.addItem(new DataItem(item.getItemType(), (npNumber.getValue()+(npDecimal.getValue()/10.0)), getCurrentTime()));
+                        finish();
+                    }
+                });
 
                 break;
 
         }
 
-        TimePicker tp = (TimePicker) findViewById(R.id.timepickerBP);
+        TimePicker tp = (TimePicker) findViewById(R.id.timePicker);
         tp.setIs24HourView(true);
+    }
 
+    private long getCurrentTime() {
+        TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
+        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
 
+        int month = datePicker.getMonth();
+        int day = datePicker.getDayOfMonth();
+        int year = datePicker.getYear();
 
+        int hour = timePicker.getCurrentHour();
+        int minute = timePicker.getCurrentMinute();
 
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day, hour, minute);
+        return c.getTimeInMillis();
     }
 }

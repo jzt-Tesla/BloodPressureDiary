@@ -20,7 +20,7 @@ import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
 public class MainView extends AppCompatActivity {
 
-    DatabaseAccess database = new DatabaseAccessDummyImpl();
+    DatabaseAccess database = DatabaseAccessDummyImpl.getInstance();
     UserDataAccess userData = new UserDataAccessDummyImpl();
 
     @Override
@@ -40,6 +40,14 @@ public class MainView extends AppCompatActivity {
                 startActivity(new Intent(MainView.this, AddDataItemChoser.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        ListView lv=(ListView) findViewById(R.id.listView);
+        lv.setAdapter(new DataItemListAdapter(this, database.getFloatingMeansOfAllTrackedDataItems()));
+
+        super.onResume();
     }
 
     @Override

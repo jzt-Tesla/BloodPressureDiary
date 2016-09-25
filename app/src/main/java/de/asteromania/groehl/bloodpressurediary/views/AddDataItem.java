@@ -9,7 +9,6 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.sql.Time;
 import java.util.Calendar;
 
 import de.asteromania.groehl.bloodpressurediary.R;
@@ -31,7 +30,7 @@ public class AddDataItem extends AppCompatActivity {
     private static final int MIN_BP_VALUE = 0;
     private static final int BP_VALUE = 140;
 
-    DatabaseAccess database = new DatabaseAccessDummyImpl();
+    DatabaseAccess database = DatabaseAccessDummyImpl.getInstance();
 
     private DataItemType currentType;
 

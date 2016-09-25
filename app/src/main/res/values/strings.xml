@@ -21,4 +21,10 @@
     <string name="dataTypeBloodPressure">Blood Pressure</string>
     <string name="date_and_time">Time and Date</string>
     <string name="dot">.</string>
+    <string name="bpSeperator">/</string>
+    <string name="value">value</string>
+    <string name="unit_bloodPressure">mmHg</string>
+    <string name="unit_heartrate">bpm</string>
+    <string name="unit_weight">kg</string>
+    <string name="addValue">Add %s value</string>
 </resources>

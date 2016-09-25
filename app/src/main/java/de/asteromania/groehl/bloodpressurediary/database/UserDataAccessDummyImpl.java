@@ -41,6 +41,8 @@ public class UserDataAccessDummyImpl implements UserDataAccess
     public List<DataItemType> getTrackedValues() {
         ArrayList<DataItemType> trackedTypes = new ArrayList<>();
         trackedTypes.add(DataItemType.SYSTOLE);
+        trackedTypes.add(DataItemType.HEARTRATE);
+        trackedTypes.add(DataItemType.WEIGHT);
         return trackedTypes;
     }
 

@@ -22,20 +22,56 @@ public class DatabaseAccessDummyImpl implements DatabaseAccess
     @Override
     public Collection<? extends DataItem> getAllItemsByType(DataItemType type) {
         ArrayList<DataItem> returnList = new ArrayList<>();
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 144, new Date().getTime()));
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 139, new Date().getTime()));
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 133, new Date().getTime()));
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 120, new Date().getTime()));
+        switch(type) {
+            case SYSTOLE:
+            returnList.add(new DataItem(DataItemType.SYSTOLE, 144, new Date().getTime()));
+            returnList.add(new DataItem(DataItemType.SYSTOLE, 139, new Date().getTime()));
+            returnList.add(new DataItem(DataItemType.SYSTOLE, 133, new Date().getTime()));
+            returnList.add(new DataItem(DataItemType.SYSTOLE, 120, new Date().getTime()));
+                break;
+            case DIASTOLE:
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 96, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 104, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 99, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 100, new Date().getTime()));
+                break;
+            case HEARTRATE:
+                returnList.add(new DataItem(DataItemType.HEARTRATE, 86, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.HEARTRATE, 84, new Date().getTime()));
+                break;
+            case WEIGHT:
+                returnList.add(new DataItem(DataItemType.WEIGHT, 120, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.WEIGHT, 123, new Date().getTime()));
+                break;
+        }
         return returnList;
     }
 
     @Override
     public Collection<? extends DataItem> getLastNItemsByType(int n, DataItemType type) {
         ArrayList<DataItem> returnList = new ArrayList<>();
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 144, new Date().getTime()));
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 139, new Date().getTime()));
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 133, new Date().getTime()));
-        returnList.add(new DataItem(DataItemType.SYSTOLE, 120, new Date().getTime()));
+        switch(type) {
+            case SYSTOLE:
+                returnList.add(new DataItem(DataItemType.SYSTOLE, 144, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.SYSTOLE, 139, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.SYSTOLE, 133, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.SYSTOLE, 120, new Date().getTime()));
+                break;
+            case DIASTOLE:
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 96, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 104, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 99, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.DIASTOLE, 100, new Date().getTime()));
+                break;
+            case HEARTRATE:
+                returnList.add(new DataItem(DataItemType.HEARTRATE, 86, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.HEARTRATE, 84, new Date().getTime()));
+                break;
+            case WEIGHT:
+                returnList.add(new DataItem(DataItemType.WEIGHT, 120, new Date().getTime()));
+                returnList.add(new DataItem(DataItemType.WEIGHT, 123, new Date().getTime()));
+                break;
+        }
         return returnList;
     }
 

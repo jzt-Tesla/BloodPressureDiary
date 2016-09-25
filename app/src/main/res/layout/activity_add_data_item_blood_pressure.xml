@@ -20,28 +20,28 @@
         android:gravity="center">
 
         <NumberPicker
-            android:id="@+id/numberPickerNumber"
+            android:id="@+id/numberPickerSystole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dot" />
+            android:text="@string/bpSeperator" />
 
         <NumberPicker
-            android:id="@+id/numberPickerDecimal"
+            android:id="@+id/numberPickerDiastole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/textViewUnit"
+            android:id="@+id/textViewUnitSystole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
     <include layout="@layout/time_and_date" />
 
-    <include layout="@layout/button_add" />
+    <include layout="@layout/button_add"/>
 
 </LinearLayout>

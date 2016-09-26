@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import de.asteromania.groehl.bloodpressurediary.R;
+import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.database.UserDataAccess;
 import de.asteromania.groehl.bloodpressurediary.database.UserDataAccessDummyImpl;
 
 public class LaunchActivity extends AppCompatActivity {
 
     private static final String TAG = "LaunchActivity";
-    UserDataAccess userDataAccess = new UserDataAccessDummyImpl();
+    UserDataAccess userDataAccess = DatabaseService.getUserDataAccess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,13 +10,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import de.asteromania.groehl.bloodpressurediary.R;
+import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.database.UserDataAccess;
 import de.asteromania.groehl.bloodpressurediary.database.UserDataAccessDummyImpl;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
 public class AddDataItemChoser extends AppCompatActivity {
 
-    UserDataAccess userDataAccess = new UserDataAccessDummyImpl();
+    UserDataAccess userDataAccess = DatabaseService.getUserDataAccess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

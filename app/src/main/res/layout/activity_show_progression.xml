@@ -9,4 +9,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.asteromania.groehl.bloodpressurediary.views.ShowProgressionActivity">
 
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:id="@+id/graphProgression" />
+
 </RelativeLayout>

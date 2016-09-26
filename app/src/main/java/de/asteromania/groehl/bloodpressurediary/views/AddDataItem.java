@@ -14,6 +14,7 @@ import java.util.Calendar;
 import de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccessDummyImpl;
+import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
@@ -30,9 +31,7 @@ public class AddDataItem extends AppCompatActivity {
     private static final int MIN_BP_VALUE = 0;
     private static final int BP_VALUE = 140;
 
-    DatabaseAccess database = DatabaseAccessDummyImpl.getInstance();
-
-    private DataItemType currentType;
+    DatabaseAccess database = DatabaseService.getDatabaseAccess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class AddDataItem extends AppCompatActivity {
 
         String extraString = getIntent().getStringExtra(EXTRA);
 
-        currentType = DataItemType.valueOf(extraString);
+        DataItemType currentType = DataItemType.valueOf(extraString);
 
         if (currentType == null) {
             finish();
@@ -69,7 +68,7 @@ public class AddDataItem extends AppCompatActivity {
                 else
                     npSystole.setValue(BP_VALUE);
 
-                NumberPicker npDiastole = (NumberPicker) findViewById(R.id.numberPickerDiastole);
+                final NumberPicker npDiastole = (NumberPicker) findViewById(R.id.numberPickerDiastole);
                 npDiastole.setMaxValue(MAX_BP_VALUE);
                 npDiastole.setMinValue(MIN_BP_VALUE);
                 if (item != null)
@@ -78,13 +77,14 @@ public class AddDataItem extends AppCompatActivity {
                     npDiastole.setValue(BP_VALUE);
 
                 TextView unit = (TextView) findViewById(R.id.textViewUnitSystole);
+                if(item !=null && item.getItemType()!=null)
                 unit.setText(item.getItemType().getUnitString());
 
                 buttonAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         database.addItem(new DataItem(DataItemType.SYSTOLE, npSystole.getValue(), getCurrentTime()));
-                        database.addItem(new DataItem(DataItemType.DIASTOLE, npSystole.getValue(), getCurrentTime()));
+                        database.addItem(new DataItem(DataItemType.DIASTOLE, npDiastole.getValue(), getCurrentTime()));
                         finish();
                     }
                 });
@@ -106,14 +106,17 @@ public class AddDataItem extends AppCompatActivity {
                 else
                     npDecimal.setValue(DECIMAL_VALUE);
 
+                if(item !=null && item.getItemType()!=null)
                 titleView.setText(String.format(getString(R.string.addValue), getString(item.getItemType().getText())));
 
                 TextView unitNormal = (TextView) findViewById(R.id.textViewUnit);
+                if(item !=null && item.getItemType()!=null)
                 unitNormal.setText(item.getItemType().getUnitString());
 
                 buttonAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(item !=null && item.getItemType()!=null)
                         database.addItem(new DataItem(item.getItemType(), (npNumber.getValue()+(npDecimal.getValue()/10.0)), getCurrentTime()));
                         finish();
                     }

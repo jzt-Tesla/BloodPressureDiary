@@ -18,17 +18,10 @@ import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
  */
 public class DatabaseAccessDummyImpl implements DatabaseAccess
 {
-
-    private static DatabaseAccessDummyImpl instance = new DatabaseAccessDummyImpl();
     private static final String TAG = "DatabaseAccessDummyImpl" ;
     private HashMap<DataItemType, ArrayList<DataItem>> dataItems;
 
-    public static DatabaseAccessDummyImpl getInstance()
-    {
-        return instance;
-    }
-
-    private DatabaseAccessDummyImpl()
+    DatabaseAccessDummyImpl()
     {
         dataItems = new HashMap<>();
         for(DataItemType type : DataItemType.values())

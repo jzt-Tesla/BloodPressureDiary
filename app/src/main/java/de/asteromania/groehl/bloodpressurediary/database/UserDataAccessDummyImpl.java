@@ -12,6 +12,11 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
  */
 public class UserDataAccessDummyImpl implements UserDataAccess
 {
+    UserDataAccessDummyImpl()
+    {
+
+    }
+
     @Override
     public boolean dataAvailable() {
         return true;

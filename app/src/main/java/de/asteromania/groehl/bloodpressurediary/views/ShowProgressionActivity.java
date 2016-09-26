@@ -8,6 +8,7 @@ import com.jjoe64.graphview.GraphView;
 import de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
+import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
 public class ShowProgressionActivity extends AppCompatActivity {
 
@@ -19,6 +20,14 @@ public class ShowProgressionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_progression);
+
+        String extraString = getIntent().getStringExtra(EXTRA);
+
+        DataItemType currentType = DataItemType.valueOf(extraString);
+
+        if (currentType == null) {
+            finish();
+        }
 
         GraphView graph = (GraphView) findViewById(R.id.graphProgression);
 

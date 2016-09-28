@@ -4,9 +4,13 @@ import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemTrend;
@@ -28,23 +32,34 @@ public class DatabaseAccessDummyImpl implements DatabaseAccess
         {
             dataItems.put(type, new ArrayList<DataItem>());
         }
-        dataItems.get(DataItemType.SYSTOLE).add(0, new DataItem(DataItemType.SYSTOLE, 144, new Date().getTime()));
-        dataItems.get(DataItemType.SYSTOLE).add(0, new DataItem(DataItemType.SYSTOLE, 139, new Date().getTime()));
-        dataItems.get(DataItemType.SYSTOLE).add(0, new DataItem(DataItemType.SYSTOLE, 133, new Date().getTime()));
-        dataItems.get(DataItemType.SYSTOLE).add(0, new DataItem(DataItemType.SYSTOLE, 120, new Date().getTime()));
-        dataItems.get(DataItemType.DIASTOLE).add(0, new DataItem(DataItemType.DIASTOLE, 96, new Date().getTime()));
-        dataItems.get(DataItemType.DIASTOLE).add(0, new DataItem(DataItemType.DIASTOLE, 104, new Date().getTime()));
-        dataItems.get(DataItemType.DIASTOLE).add(0, new DataItem(DataItemType.DIASTOLE, 99, new Date().getTime()));
-        dataItems.get(DataItemType.DIASTOLE).add(0, new DataItem(DataItemType.DIASTOLE, 100, new Date().getTime()));
-        dataItems.get(DataItemType.HEARTRATE).add(0, new DataItem(DataItemType.HEARTRATE, 86, new Date().getTime()));
-        dataItems.get(DataItemType.HEARTRATE).add(0, new DataItem(DataItemType.HEARTRATE, 84, new Date().getTime()));
-        dataItems.get(DataItemType.WEIGHT).add(0, new DataItem(DataItemType.WEIGHT, 120, new Date().getTime()));
-        dataItems.get(DataItemType.WEIGHT).add(0, new DataItem(DataItemType.WEIGHT, 123, new Date().getTime()));
+        dataItems.get(DataItemType.SYSTOLE).add(new DataItem(DataItemType.SYSTOLE, 144, getDate(2016, 11, 1, 13, 0)));
+        dataItems.get(DataItemType.SYSTOLE).add(new DataItem(DataItemType.SYSTOLE, 139, getDate(2016, 11, 2, 13, 0)));
+        dataItems.get(DataItemType.SYSTOLE).add(new DataItem(DataItemType.SYSTOLE, 133, getDate(2016, 11, 3, 13, 0)));
+        dataItems.get(DataItemType.SYSTOLE).add(new DataItem(DataItemType.SYSTOLE, 120, getDate(2016, 11, 4, 13, 0)));
+        dataItems.get(DataItemType.DIASTOLE).add(new DataItem(DataItemType.DIASTOLE, 96, getDate(2016, 11, 1, 13, 0)));
+        dataItems.get(DataItemType.DIASTOLE).add(new DataItem(DataItemType.DIASTOLE, 104, getDate(2016, 11, 2, 13, 0)));
+        dataItems.get(DataItemType.DIASTOLE).add(new DataItem(DataItemType.DIASTOLE, 99, getDate(2016, 11, 3, 13, 0)));
+        dataItems.get(DataItemType.DIASTOLE).add(new DataItem(DataItemType.DIASTOLE, 100, getDate(2016, 11, 4, 13, 0)));
+        dataItems.get(DataItemType.HEARTRATE).add(new DataItem(DataItemType.HEARTRATE, 86, getDate(2016, 11, 1, 13, 0)));
+        dataItems.get(DataItemType.HEARTRATE).add(new DataItem(DataItemType.HEARTRATE, 84, getDate(2016, 11, 3, 13, 0)));
+        dataItems.get(DataItemType.WEIGHT).add(new DataItem(DataItemType.WEIGHT, 120, getDate(2016, 11, 1, 13, 0)));
+        dataItems.get(DataItemType.WEIGHT).add(new DataItem(DataItemType.WEIGHT, 123, getDate(2016, 11, 3, 13, 0)));
     }
 
     @Override
     public boolean addItem(DataItem item) {
-        dataItems.get(item.getItemType()).add(0, item);
+        dataItems.get(item.getItemType()).add(item);
+        Collections.sort(dataItems.get(item.getItemType()), new Comparator<DataItem>() {
+            @Override
+            public int compare(DataItem dataItem, DataItem t1) {
+                if(dataItem.getDate()>t1.getDate())
+                    return 1;
+                else if(dataItem.getDate()<t1.getDate())
+                    return -1;
+                else
+                    return 0;
+            }
+        });
         return true;
     }
 
@@ -57,7 +72,7 @@ public class DatabaseAccessDummyImpl implements DatabaseAccess
     public Collection<? extends DataItem> getLastNItemsByType(int n, DataItemType type) {
         ArrayList<DataItem> returnList = dataItems.get(type);
         int size = returnList.size();
-        return returnList.subList(0, n > size ? n : size);
+        return returnList.subList((size-n) < 0 ? 0 : (size-n), size);
     }
 
     @Override
@@ -77,7 +92,7 @@ public class DatabaseAccessDummyImpl implements DatabaseAccess
             mean /= 10;
             DataItemTrend trend = DataItemTrend.NEUTRAL;
             if(typeList.size()>1) {
-                double ratio = typeList.get(0).getValue() / typeList.get(1).getValue();
+                double ratio = typeList.get(typeList.size()-1).getValue() / typeList.get(typeList.size()-2).getValue();
                 Log.i(TAG, ""+ratio);
                 if (ratio > 1)
                     trend = DataItemTrend.NEGATIVE;
@@ -87,5 +102,47 @@ public class DatabaseAccessDummyImpl implements DatabaseAccess
             returnList.add(new ListViewItem(type, mean, trend));
         }
         return returnList;
+    }
+
+    @Override
+    public double getMaximumValue(DataItemType type) {
+        double max = 0;
+        Collection<? extends DataItem> items = getAllItemsByType(type);
+        for(DataItem d : items)
+        {
+            if(d.getValue()>max)
+                max = d.getValue();
+        }
+        return max;
+    }
+
+    @Override
+    public double getMinimumDate(DataItemType type) {
+        double min = Double.MAX_VALUE;
+        Collection<? extends DataItem> items = getAllItemsByType(type);
+        for(DataItem d : items)
+        {
+            if(d.getDate()<min)
+                min = d.getDate();
+        }
+        return min;
+    }
+
+    @Override
+    public double getMaximumDate(DataItemType type) {
+        double max = 0;
+        Collection<? extends DataItem> items = getAllItemsByType(type);
+        for(DataItem d : items)
+        {
+            if(d.getDate()>max)
+                max = d.getDate();
+        }
+        return max;
+    }
+
+    private long getDate(int year, int month, int day, int hour, int minute) {
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day, hour, minute);
+        return c.getTimeInMillis();
     }
 }

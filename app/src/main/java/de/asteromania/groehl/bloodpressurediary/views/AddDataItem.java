@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -46,6 +47,25 @@ public class AddDataItem extends AppCompatActivity {
         }
 
         setContentView(currentType.getAddItemView());
+
+        final CheckBox cbDateTime = (CheckBox) findViewById(R.id.checkboxTimeDate);
+        final TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
+        final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        cbDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cbDateTime.isChecked())
+                {
+                    timePicker.setVisibility(View.VISIBLE);
+                    datePicker.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    timePicker.setVisibility(View.GONE);
+                    datePicker.setVisibility(View.GONE);
+                }
+            }
+        });
 
         final DataItem item = (DataItem) database.getLastNItemsByType(1, currentType).toArray()[0];
 

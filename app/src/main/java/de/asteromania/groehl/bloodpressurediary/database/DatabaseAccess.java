@@ -35,4 +35,9 @@ public interface DatabaseAccess
 
     Collection<? extends ListViewItem> getFloatingMeansOfAllTrackedDataItems();
 
+    double getMaximumValue(DataItemType type);
+
+    double getMinimumDate(DataItemType type);
+
+    double getMaximumDate(DataItemType type);
 }

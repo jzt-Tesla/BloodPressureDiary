@@ -76,7 +76,7 @@ public class DataItemListAdapter extends BaseAdapter
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, InfoActivity.class);
-
+                intent.putExtra(InfoActivity.EXTRA, dataItems.get(position).getDataItemType().getInformationType().toString());
                 context.startActivity(intent);
             }
         });

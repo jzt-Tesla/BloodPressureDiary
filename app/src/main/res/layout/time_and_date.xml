@@ -19,12 +19,6 @@
         android:layout_marginLeft="12sp"
         />
 
-    <CheckBox
-        android:id="@+id/checkboxTimeDate"
-        android:layout_width="36sp"
-        android:layout_height="36sp"
-        android:checked="false"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -36,8 +30,7 @@
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
-            android:layout_height="96sp"
-            android:visibility="gone"/>
+            android:layout_height="96sp"/>
 
     </LinearLayout>
 
@@ -52,8 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="96sp"
             android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:visibility="gone"/>
+            android:datePickerMode="spinner"/>
 
     </LinearLayout>
 

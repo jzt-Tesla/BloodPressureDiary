@@ -48,25 +48,6 @@ public class AddDataItem extends AppCompatActivity {
 
         setContentView(currentType.getAddItemView());
 
-        final CheckBox cbDateTime = (CheckBox) findViewById(R.id.checkboxTimeDate);
-        final TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
-        final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        cbDateTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(cbDateTime.isChecked())
-                {
-                    timePicker.setVisibility(View.VISIBLE);
-                    datePicker.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    timePicker.setVisibility(View.GONE);
-                    datePicker.setVisibility(View.GONE);
-                }
-            }
-        });
-
         final DataItem item = (DataItem) database.getLastNItemsByType(1, currentType).toArray()[0];
 
         TextView titleView = (TextView) findViewById(R.id.textViewAddTitle);

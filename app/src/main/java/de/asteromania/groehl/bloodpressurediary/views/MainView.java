@@ -17,6 +17,7 @@ import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.database.UserDataAccess;
 import de.asteromania.groehl.bloodpressurediary.database.UserDataAccessDummyImpl;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
+import de.asteromania.groehl.bloodpressurediary.domain.InformationType;
 import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
 public class MainView extends AppCompatActivity {
@@ -76,7 +77,9 @@ public class MainView extends AppCompatActivity {
             return true;
         } else if(id == R.id.action_info)
         {
-            startActivity(new Intent(this, InfoActivity.class));
+            Intent infoIntent = new Intent(this, InfoActivity.class);
+            infoIntent.putExtra(InfoActivity.EXTRA, InformationType.GENERAL_INFORMATION.toString());
+            this.startActivity(infoIntent);
             return true;
         } else if(id == R.id.action_settings)
         {

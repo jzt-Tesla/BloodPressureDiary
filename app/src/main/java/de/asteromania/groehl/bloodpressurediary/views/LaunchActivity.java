@@ -11,14 +11,17 @@ import de.asteromania.groehl.bloodpressurediary.database.UserDatabaseAccess;
 public class LaunchActivity extends AppCompatActivity {
 
     private static final String TAG = "LaunchActivity";
-    UserDatabaseAccess userDatabaseAccess = DatabaseService.getUserDataAccess();
+
+    private DatabaseService databaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Hello World");
 
-        if(userDatabaseAccess.dataAvailable())
+        databaseService = new DatabaseService(this);
+
+        if(databaseService.getUserDataAccess().dataAvailable())
         {
             Log.i(TAG, "Starting main view.");
             startActivity(new Intent(this, MainView.class));

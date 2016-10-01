@@ -16,16 +16,19 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
 public class AddDataItemChoser extends AppCompatActivity {
 
-    UserDatabaseAccess userDatabaseAccess = DatabaseService.getUserDataAccess();
+    private DatabaseService databaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        databaseService = new DatabaseService(this);
+
         setContentView(R.layout.activity_add_data_item_choser);
 
         LinearLayout view = (LinearLayout) findViewById(R.id.relative_layout_data_item_choser);
 
-        for(DataItemType type : userDatabaseAccess.getTrackedValues())
+        for(DataItemType type : databaseService.getUserDataAccess().getTrackedValues())
         {
             if(type == DataItemType.DIASTOLE)
                 continue;

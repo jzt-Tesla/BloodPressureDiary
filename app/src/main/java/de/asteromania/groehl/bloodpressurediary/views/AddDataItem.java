@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.Collection;
 
 import de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
@@ -28,13 +29,16 @@ public class AddDataItem extends AppCompatActivity {
     private static final int DECIMAL_VALUE = 0;
     private static final int MAX_BP_VALUE = 499;
     private static final int MIN_BP_VALUE = 0;
-    private static final int BP_VALUE = 140;
+    private static final int BP_SYS_VALUE = 128;
+    private static final int BP_DIA_VALUE = 72;
 
-    DataItemDatabaseAccess database = DatabaseService.getDataItemDatabaseAccess();
+    private DatabaseService databaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        databaseService = new DatabaseService(this);
 
         String extraString = getIntent().getStringExtra(EXTRA);
 
@@ -46,8 +50,6 @@ public class AddDataItem extends AppCompatActivity {
 
         setContentView(currentType.getAddItemView());
 
-        final DataItem item = (DataItem) database.getLastNItemsByType(1, currentType).toArray()[0];
-
         TextView titleView = (TextView) findViewById(R.id.textViewAddTitle);
         Button buttonAdd = (Button) findViewById(R.id.buttonAdd);
 
@@ -55,48 +57,56 @@ public class AddDataItem extends AppCompatActivity {
         {
             case SYSTOLE:
             case DIASTOLE:
-                DataItem systole = (DataItem) database.getLastNItemsByType(1, DataItemType.SYSTOLE).toArray()[0];
-                DataItem diastole = (DataItem) database.getLastNItemsByType(1, DataItemType.DIASTOLE).toArray()[0];
+                DataItem systole = new DataItem(DataItemType.SYSTOLE, BP_SYS_VALUE, 0);
+                Collection<? extends  DataItem> collectionSystole = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, currentType);
+                if(collectionSystole!=null && !collectionSystole.isEmpty())
+                    systole = (DataItem) collectionSystole.toArray()[0];
+
+                DataItem diastole = new DataItem(DataItemType.DIASTOLE, BP_DIA_VALUE, 0);
+                Collection<? extends  DataItem> collectionDiastole = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, currentType);
+                if(collectionDiastole!=null && !collectionDiastole.isEmpty())
+                    diastole = (DataItem) collectionDiastole.toArray()[0];
 
                 titleView.setText(String.format(getString(R.string.addValue), getString(R.string.dataTypeBloodPressure)));
                 final NumberPicker npSystole = (NumberPicker) findViewById(R.id.numberPickerSystole);
                 npSystole.setMaxValue(MAX_BP_VALUE);
                 npSystole.setMinValue(MIN_BP_VALUE);
-                if (item != null)
+
                     npSystole.setValue((int) systole.getValue());
-                else
-                    npSystole.setValue(BP_VALUE);
+
 
                 final NumberPicker npDiastole = (NumberPicker) findViewById(R.id.numberPickerDiastole);
                 npDiastole.setMaxValue(MAX_BP_VALUE);
                 npDiastole.setMinValue(MIN_BP_VALUE);
-                if (item != null)
+
                     npDiastole.setValue((int) diastole.getValue());
-                else
-                    npDiastole.setValue(BP_VALUE);
+
 
                 TextView unit = (TextView) findViewById(R.id.textViewUnitSystole);
-                if(item !=null && item.getItemType()!=null)
-                unit.setText(item.getItemType().getUnitString());
+                if(systole !=null && systole.getItemType()!=null)
+                unit.setText(systole.getItemType().getUnitString());
 
                 buttonAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        database.addItem(new DataItem(DataItemType.SYSTOLE, npSystole.getValue(), getCurrentTime()));
-                        database.addItem(new DataItem(DataItemType.DIASTOLE, npDiastole.getValue(), getCurrentTime()));
+                        databaseService.getDataItemDatabaseAccess().addItem(new DataItem(DataItemType.SYSTOLE, npSystole.getValue(), getCurrentTime()));
+                        databaseService.getDataItemDatabaseAccess().addItem(new DataItem(DataItemType.DIASTOLE, npDiastole.getValue(), getCurrentTime()));
                         finish();
                     }
                 });
                 break;
 
             default:
+                DataItem item = new DataItem(currentType, NUMBER_VALUE, 0);
+                Collection<? extends  DataItem> collection = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, currentType);
+                if(collection!=null && !collection.isEmpty())
+                    item = (DataItem) collection.toArray()[0];
+
                 final NumberPicker npNumber = (NumberPicker) findViewById(R.id.numberPickerNumber);
                 npNumber.setMaxValue(MAX_NUMBER_VALUE);
                 npNumber.setMinValue(MIN_NUMBER_VALUE);
-                if (item != null)
-                    npNumber.setValue((int) item.getValue());
-                else
-                    npNumber.setValue(NUMBER_VALUE);
+                npNumber.setValue((int) item.getValue());
+
                 final NumberPicker npDecimal = (NumberPicker) findViewById(R.id.numberPickerDecimal);
                 npDecimal.setMaxValue(MAX_DECIMAL_VALUE);
                 npDecimal.setMinValue(MIN_DECIMAL_VALUE);
@@ -112,11 +122,13 @@ public class AddDataItem extends AppCompatActivity {
                 if(item !=null && item.getItemType()!=null)
                 unitNormal.setText(item.getItemType().getUnitString());
 
+                final DataItem buttonItem = item;
+
                 buttonAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(item !=null && item.getItemType()!=null)
-                        database.addItem(new DataItem(item.getItemType(), (npNumber.getValue()+(npDecimal.getValue()/10.0)), getCurrentTime()));
+                        if(buttonItem !=null && buttonItem.getItemType()!=null)
+                            databaseService.getDataItemDatabaseAccess().addItem(new DataItem(buttonItem.getItemType(), (npNumber.getValue()+(npDecimal.getValue()/10.0)), getCurrentTime()));
                         finish();
                     }
                 });

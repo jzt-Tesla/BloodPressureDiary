@@ -1,22 +1,33 @@
 package de.asteromania.groehl.bloodpressurediary.database;
 
+import android.content.Context;
+
+import java.util.HashMap;
+
+import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
+
 /**
  * Created by jgroehl on 26.09.16.
  */
 public final class DatabaseService {
 
-    private DatabaseService(){}
 
-    private static DataItemDatabaseAccess dataItemDatabaseAccessInstance = new DataItemDatabaseAccessDummyImpl();
-    private static UserDatabaseAccess userDatabaseAccessInstance = new UserDatabaseAccessDummyImpl();
+    private DataItemDatabaseAccess dataItemDatabaseAccess;
+    private UserDatabaseAccess userDatabaseAccess;
 
-    public static DataItemDatabaseAccess getDataItemDatabaseAccess()
+    public DatabaseService(Context context)
     {
-       return dataItemDatabaseAccessInstance;
+        dataItemDatabaseAccess = new DataItemSqLiteDatabase(context);
+        userDatabaseAccess = new UserDatabaseAccessDummyImpl();
     }
 
-    public static UserDatabaseAccess getUserDataAccess()
+    public DataItemDatabaseAccess getDataItemDatabaseAccess()
     {
-        return userDatabaseAccessInstance;
+       return dataItemDatabaseAccess;
+    }
+
+    public  UserDatabaseAccess getUserDataAccess()
+    {
+        return userDatabaseAccess;
     }
 }

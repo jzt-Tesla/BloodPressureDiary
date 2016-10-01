@@ -33,11 +33,30 @@ public interface DataItemDatabaseAccess
      */
     Collection<? extends DataItem> getLastNItemsByType(int n, DataItemType type);
 
+    /**
+     *
+     * @return
+     */
     Collection<? extends ListViewItem> getFloatingMeansOfAllTrackedDataItems();
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     double getMaximumValue(DataItemType type);
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     double getMinimumDate(DataItemType type);
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     double getMaximumDate(DataItemType type);
 }

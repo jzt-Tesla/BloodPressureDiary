@@ -9,6 +9,12 @@ public class ListViewItem {
     double mean;
     DataItemTrend dataItemTrend;
 
+    /**
+     *
+     * @param dataItemType
+     * @param mean
+     * @param dataItemTrend
+     */
     public ListViewItem(DataItemType dataItemType, double mean, DataItemTrend dataItemTrend)
     {
         this.dataItemType = dataItemType;

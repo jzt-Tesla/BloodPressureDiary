@@ -19,18 +19,20 @@ import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
 public class MainView extends AppCompatActivity {
 
-    DataItemDatabaseAccess database = DatabaseService.getDataItemDatabaseAccess();
-    UserDatabaseAccess userData = DatabaseService.getUserDataAccess();
+    private DatabaseService databaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        databaseService = new DatabaseService(this);
+
         setContentView(R.layout.activity_main_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ListView lv=(ListView) findViewById(R.id.listView);
-        lv.setAdapter(new DataItemListAdapter(this, database.getFloatingMeansOfAllTrackedDataItems()));
+        lv.setAdapter(new DataItemListAdapter(this, databaseService.getDataItemDatabaseAccess().getFloatingMeansOfAllTrackedDataItems()));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +46,7 @@ public class MainView extends AppCompatActivity {
     @Override
     protected void onResume() {
         ListView lv=(ListView) findViewById(R.id.listView);
-        lv.setAdapter(new DataItemListAdapter(this, database.getFloatingMeansOfAllTrackedDataItems()));
+        lv.setAdapter(new DataItemListAdapter(this, databaseService.getDataItemDatabaseAccess().getFloatingMeansOfAllTrackedDataItems()));
 
         super.onResume();
     }

@@ -27,12 +27,14 @@ public class ShowProgressionActivity extends AppCompatActivity {
     private static final double GRAPH_MARGIN = 10;
     private static final int MAX_HORIZONTAL_LABELS = 5;
 
-    DataItemDatabaseAccess database = DatabaseService.getDataItemDatabaseAccess();
+    private DatabaseService databaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_progression);
+
+        databaseService = new DatabaseService(this);
 
         setupView();
 
@@ -65,8 +67,8 @@ public class ShowProgressionActivity extends AppCompatActivity {
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(database.getMinimumDate(currentType));
-        graph.getViewport().setMaxX(database.getMaximumDate(currentType));
+        graph.getViewport().setMinX(databaseService.getDataItemDatabaseAccess().getMinimumDate(currentType));
+        graph.getViewport().setMaxX(databaseService.getDataItemDatabaseAccess().getMaximumDate(currentType));
 
 
 
@@ -76,11 +78,11 @@ public class ShowProgressionActivity extends AppCompatActivity {
         case DIASTOLE:
             addDataSeriesToGraph(DataItemType.SYSTOLE, graph, Color.BLUE);
             addDataSeriesToGraph(DataItemType.DIASTOLE, graph, Color.BLACK);
-            graph.getViewport().setMaxY(database.getMaximumValue(DataItemType.SYSTOLE)+ GRAPH_MARGIN);
+            graph.getViewport().setMaxY(databaseService.getDataItemDatabaseAccess().getMaximumValue(DataItemType.SYSTOLE)+ GRAPH_MARGIN);
         break;
         default:
             addDataSeriesToGraph(currentType, graph, Color.BLUE);
-            graph.getViewport().setMaxY(database.getMaximumValue(currentType)+ GRAPH_MARGIN);
+            graph.getViewport().setMaxY(databaseService.getDataItemDatabaseAccess().getMaximumValue(currentType)+ GRAPH_MARGIN);
             break;
         }
 
@@ -92,7 +94,7 @@ public class ShowProgressionActivity extends AppCompatActivity {
         LineGraphSeries<DataPoint> s = new LineGraphSeries<>();
         s.setTitle(getString(type.getText()));
         s.setColor(color);
-        List<DataItem> list = (List<DataItem>) database.getLastNItemsByType(MAX_DATA_POINTS, type);
+        List<DataItem> list = (List<DataItem>) databaseService.getDataItemDatabaseAccess().getLastNItemsByType(MAX_DATA_POINTS, type);
         graph.getGridLabelRenderer().setNumHorizontalLabels(list.size()<MAX_HORIZONTAL_LABELS?list.size():MAX_HORIZONTAL_LABELS);
         for(DataItem d : list)
         {

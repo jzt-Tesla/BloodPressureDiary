@@ -69,21 +69,13 @@ public class DataItemListAdapter extends BaseAdapter
         rowView = inflater.inflate(R.layout.layout_data_item, null);
         TextView text =(TextView) rowView.findViewById(R.id.textViewDataItemText);
         TextView value =(TextView) rowView.findViewById(R.id.textViewDataItemValue);
-        ImageView img=(ImageView) rowView.findViewById(R.id.imageViewTrend);
-        Button btn = (Button) rowView.findViewById(R.id.buttonInfo);
-
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, InfoActivity.class);
-                intent.putExtra(InfoActivity.EXTRA, dataItems.get(position).getDataItemType().getInformationType().toString());
-                context.startActivity(intent);
-            }
-        });
+        ImageView trendIcon=(ImageView) rowView.findViewById(R.id.imageViewTrend);
+        ImageView typeIcon = (ImageView) rowView.findViewById(R.id.imageViewTypeIcon);
 
         text.setText(dataItems.get(position).getDataItemType().getText());
         value.setText(String.valueOf(dataItems.get(position).getMean()));
-        img.setImageResource(dataItems.get(position).getDataItemTrend().getImage());
+        trendIcon.setImageResource(dataItems.get(position).getDataItemTrend().getImage());
+        typeIcon.setImageResource(dataItems.get(position).getDataItemType().getTypeIcon());
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override

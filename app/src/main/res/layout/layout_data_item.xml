@@ -7,6 +7,16 @@
     android:paddingTop="5sp"
     android:paddingBottom="5sp">
 
+    <ImageView
+        android:id="@+id/imageViewTypeIcon"
+        android:contentDescription="@string/imageViewTrend"
+        android:layout_gravity="center"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginEnd="5sp"
+        android:src="@mipmap/ic_launcher" />
+
     <TextView
         android:id="@+id/textViewDataItemText"
         android:layout_gravity="center"
@@ -19,7 +29,7 @@
     <TextView
         android:id="@+id/textViewDataItemValue"
         android:layout_gravity="center"
-        android:layout_width="80sp"
+        android:layout_width="85sp"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -36,20 +46,10 @@
         android:id="@+id/imageViewTrend"
         android:contentDescription="@string/imageViewTrend"
         android:layout_gravity="center"
-        android:layout_width="32sp"
-        android:layout_height="32sp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
         android:layout_marginLeft="5sp"
         android:layout_marginStart="5sp"
         android:src="@mipmap/ic_launcher" />
-
-    <Button
-        android:id="@+id/buttonInfo"
-        android:layout_gravity="center"
-        android:layout_width="48sp"
-        android:layout_height="48sp"
-        android:layout_marginLeft="5sp"
-        android:layout_marginStart="5sp"
-        android:clickable="true"
-        android:background="@android:drawable/ic_menu_info_details" />
 
 </LinearLayout>

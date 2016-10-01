@@ -45,7 +45,7 @@ public class AddDataItemChoser extends AppCompatActivity {
         button.setGravity(Gravity.CENTER);
         button.setWidth(width);
         button.setHeight(height);
-        button.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_launcher, 0, 0, 0);
+        button.setCompoundDrawablesWithIntrinsicBounds(type.getTypeIcon(), 0, 0, 0);
         button.setMaxWidth(width);
 
         if(type == DataItemType.SYSTOLE)

@@ -37,7 +37,7 @@ public interface DataItemDatabaseAccess
      *
      * @return
      */
-    Collection<? extends ListViewItem> getFloatingMeansOfAllTrackedDataItems();
+    Collection<? extends ListViewItem> getFloatingMeansOfDataItems(Collection<? extends DataItemType> trackedDataItemTypes);
 
     /**
      *

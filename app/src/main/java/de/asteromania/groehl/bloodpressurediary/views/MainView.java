@@ -10,16 +10,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.util.List;
+
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
-import de.asteromania.groehl.bloodpressurediary.database.UserDatabaseAccess;
+import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 import de.asteromania.groehl.bloodpressurediary.domain.InformationType;
 import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
 public class MainView extends AppCompatActivity {
 
     private DatabaseService databaseService;
+    private List<DataItemType> trackedDataItemTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,14 @@ public class MainView extends AppCompatActivity {
 
         databaseService = new DatabaseService(this);
 
+        trackedDataItemTypes = databaseService.getUserDataAccess().getTrackedValues();
+
         setContentView(R.layout.activity_main_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ListView lv=(ListView) findViewById(R.id.listView);
-        lv.setAdapter(new DataItemListAdapter(this, databaseService.getDataItemDatabaseAccess().getFloatingMeansOfAllTrackedDataItems()));
+        lv.setAdapter(new DataItemListAdapter(this, databaseService.getDataItemDatabaseAccess().getFloatingMeansOfDataItems(trackedDataItemTypes)));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +50,7 @@ public class MainView extends AppCompatActivity {
     @Override
     protected void onResume() {
         ListView lv=(ListView) findViewById(R.id.listView);
-        lv.setAdapter(new DataItemListAdapter(this, databaseService.getDataItemDatabaseAccess().getFloatingMeansOfAllTrackedDataItems()));
+        lv.setAdapter(new DataItemListAdapter(this, databaseService.getDataItemDatabaseAccess().getFloatingMeansOfDataItems(trackedDataItemTypes)));
 
         super.onResume();
     }

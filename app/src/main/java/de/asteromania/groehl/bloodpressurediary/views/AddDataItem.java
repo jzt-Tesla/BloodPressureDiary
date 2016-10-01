@@ -58,12 +58,12 @@ public class AddDataItem extends AppCompatActivity {
             case SYSTOLE:
             case DIASTOLE:
                 DataItem systole = new DataItem(DataItemType.SYSTOLE, BP_SYS_VALUE, 0);
-                Collection<? extends  DataItem> collectionSystole = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, currentType);
+                Collection<? extends  DataItem> collectionSystole = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, DataItemType.SYSTOLE);
                 if(collectionSystole!=null && !collectionSystole.isEmpty())
                     systole = (DataItem) collectionSystole.toArray()[0];
 
                 DataItem diastole = new DataItem(DataItemType.DIASTOLE, BP_DIA_VALUE, 0);
-                Collection<? extends  DataItem> collectionDiastole = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, currentType);
+                Collection<? extends  DataItem> collectionDiastole = databaseService.getDataItemDatabaseAccess().getLastNItemsByType(1, DataItemType.DIASTOLE);
                 if(collectionDiastole!=null && !collectionDiastole.isEmpty())
                     diastole = (DataItem) collectionDiastole.toArray()[0];
 
@@ -72,14 +72,14 @@ public class AddDataItem extends AppCompatActivity {
                 npSystole.setMaxValue(MAX_BP_VALUE);
                 npSystole.setMinValue(MIN_BP_VALUE);
 
-                    npSystole.setValue((int) systole.getValue());
+                npSystole.setValue((int) systole.getValue());
 
 
                 final NumberPicker npDiastole = (NumberPicker) findViewById(R.id.numberPickerDiastole);
                 npDiastole.setMaxValue(MAX_BP_VALUE);
                 npDiastole.setMinValue(MIN_BP_VALUE);
 
-                    npDiastole.setValue((int) diastole.getValue());
+                npDiastole.setValue((int) diastole.getValue());
 
 
                 TextView unit = (TextView) findViewById(R.id.textViewUnitSystole);

@@ -22,6 +22,7 @@ public class DataItemDbHelper extends SQLiteOpenHelper
                     DataItemDatabaseContract.DataItemColumns._ID + " INTEGER PRIMARY KEY," +
                     DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE + " " + TEXT_TYPE + COMMA_SEP +
                     DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE + " " + REAL_TYPE + COMMA_SEP +
+                    DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DAY_DATE + " " + DATE_TYPE + COMMA_SEP +
                     DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE + " " + DATE_TYPE + " )";
 
     public DataItemDbHelper(Context context)

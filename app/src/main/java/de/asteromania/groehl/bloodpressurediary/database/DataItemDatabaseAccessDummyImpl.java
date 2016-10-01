@@ -19,7 +19,7 @@ import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
  */
 public class DataItemDatabaseAccessDummyImpl implements DataItemDatabaseAccess
 {
-    private static final String TAG = "DataItemDatabaseAccessDummyImpl" ;
+    private static final String TAG = "DatabaseDummyImpl" ;
     private HashMap<DataItemType, ArrayList<DataItem>> dataItems;
 
     DataItemDatabaseAccessDummyImpl()
@@ -73,8 +73,8 @@ public class DataItemDatabaseAccessDummyImpl implements DataItemDatabaseAccess
     }
 
     @Override
-    public Collection<? extends ListViewItem> getFloatingMeansOfAllTrackedDataItems() {
-
+    public Collection<? extends ListViewItem> getFloatingMeansOfDataItems(Collection<? extends DataItemType> trackedDataItemTypes)
+    {
         ArrayList<ListViewItem> returnList = new ArrayList<>();
         for(DataItemType type : DataItemType.values())
         {

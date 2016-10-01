@@ -7,16 +7,16 @@ public final class DatabaseService {
 
     private DatabaseService(){}
 
-    private static DatabaseAccess databaseAccessInstance = new DatabaseAccessDummyImpl();
-    private static UserDataAccess userDataAccessInstance = new UserDataAccessDummyImpl();
+    private static DataItemDatabaseAccess dataItemDatabaseAccessInstance = new DataItemDatabaseAccessDummyImpl();
+    private static UserDatabaseAccess userDatabaseAccessInstance = new UserDatabaseAccessDummyImpl();
 
-    public static DatabaseAccess getDatabaseAccess()
+    public static DataItemDatabaseAccess getDataItemDatabaseAccess()
     {
-       return databaseAccessInstance;
+       return dataItemDatabaseAccessInstance;
     }
 
-    public static UserDataAccess getUserDataAccess()
+    public static UserDatabaseAccess getUserDataAccess()
     {
-        return userDataAccessInstance;
+        return userDatabaseAccessInstance;
     }
 }

@@ -2,15 +2,12 @@ package de.asteromania.groehl.bloodpressurediary.database;
 
 import android.util.Log;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemTrend;
@@ -20,12 +17,12 @@ import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
 /**
  * Created by jgroehl on 11.09.16.
  */
-public class DatabaseAccessDummyImpl implements DatabaseAccess
+public class DataItemDatabaseAccessDummyImpl implements DataItemDatabaseAccess
 {
-    private static final String TAG = "DatabaseAccessDummyImpl" ;
+    private static final String TAG = "DataItemDatabaseAccessDummyImpl" ;
     private HashMap<DataItemType, ArrayList<DataItem>> dataItems;
 
-    DatabaseAccessDummyImpl()
+    DataItemDatabaseAccessDummyImpl()
     {
         dataItems = new HashMap<>();
         for(DataItemType type : DataItemType.values())

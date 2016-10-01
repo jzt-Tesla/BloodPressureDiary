@@ -18,11 +18,11 @@ public class DataItemDbHelper extends SQLiteOpenHelper
     private static final String DATE_TYPE = "INTEGER";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + DatabaseContract.DataItemColumns.TABLE_NAME + " (" +
-                    DatabaseContract.DataItemColumns._ID + " INTEGER PRIMARY KEY," +
-                    DatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE + TEXT_TYPE + COMMA_SEP +
-                    DatabaseContract.DataItemColumns.COLUMN_NAME_VALUE + REAL_TYPE + COMMA_SEP +
-                    DatabaseContract.DataItemColumns.COLUMN_NAME_DATE + DATE_TYPE + " )";
+            "CREATE TABLE " + DataItemDatabaseContract.DataItemColumns.TABLE_NAME + " (" +
+                    DataItemDatabaseContract.DataItemColumns._ID + " INTEGER PRIMARY KEY," +
+                    DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE + TEXT_TYPE + COMMA_SEP +
+                    DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE + REAL_TYPE + COMMA_SEP +
+                    DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE + DATE_TYPE + " )";
 
     public DataItemDbHelper(Context context)
     {

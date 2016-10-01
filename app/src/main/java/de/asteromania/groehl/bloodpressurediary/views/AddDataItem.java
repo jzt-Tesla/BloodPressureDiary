@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -13,8 +12,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
-import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccessDummyImpl;
+import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
@@ -32,7 +30,7 @@ public class AddDataItem extends AppCompatActivity {
     private static final int MIN_BP_VALUE = 0;
     private static final int BP_VALUE = 140;
 
-    DatabaseAccess database = DatabaseService.getDatabaseAccess();
+    DataItemDatabaseAccess database = DatabaseService.getDataItemDatabaseAccess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

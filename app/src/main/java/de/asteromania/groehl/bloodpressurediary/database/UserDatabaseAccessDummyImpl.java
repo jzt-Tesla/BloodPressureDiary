@@ -1,6 +1,5 @@
 package de.asteromania.groehl.bloodpressurediary.database;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,9 +9,9 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 /**
  * Created by jgroehl on 11.09.16.
  */
-public class UserDataAccessDummyImpl implements UserDataAccess
+public class UserDatabaseAccessDummyImpl implements UserDatabaseAccess
 {
-    UserDataAccessDummyImpl()
+    UserDatabaseAccessDummyImpl()
     {
 
     }

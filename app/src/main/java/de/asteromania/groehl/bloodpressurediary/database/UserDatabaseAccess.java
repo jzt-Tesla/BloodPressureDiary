@@ -8,7 +8,7 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 /**
  * Created by jgroehl on 11.09.16.
  */
-public interface UserDataAccess
+public interface UserDatabaseAccess
 {
     /**
      *

@@ -5,9 +5,9 @@ import android.provider.BaseColumns;
 /**
  * Created by jgroehl on 11.09.16.
  */
-public final class DatabaseContract
+public final class DataItemDatabaseContract
 {
-    private DatabaseContract()
+    private DataItemDatabaseContract()
     {
         // This is supposed to be an abstract class.
     }

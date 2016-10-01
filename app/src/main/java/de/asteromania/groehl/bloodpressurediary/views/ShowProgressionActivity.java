@@ -11,14 +11,11 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
+import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
@@ -30,7 +27,7 @@ public class ShowProgressionActivity extends AppCompatActivity {
     private static final double GRAPH_MARGIN = 10;
     private static final int MAX_HORIZONTAL_LABELS = 5;
 
-    DatabaseAccess database = DatabaseService.getDatabaseAccess();
+    DataItemDatabaseAccess database = DatabaseService.getDataItemDatabaseAccess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

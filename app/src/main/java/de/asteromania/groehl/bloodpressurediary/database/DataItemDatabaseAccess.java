@@ -9,7 +9,7 @@ import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
 /**
  * Created by jgroehl on 11.09.16.
  */
-public interface DatabaseAccess
+public interface DataItemDatabaseAccess
 {
     /**
      *

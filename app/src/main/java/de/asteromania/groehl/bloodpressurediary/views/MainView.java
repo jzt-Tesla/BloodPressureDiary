@@ -11,19 +11,16 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccess;
-import de.asteromania.groehl.bloodpressurediary.database.DatabaseAccessDummyImpl;
+import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
-import de.asteromania.groehl.bloodpressurediary.database.UserDataAccess;
-import de.asteromania.groehl.bloodpressurediary.database.UserDataAccessDummyImpl;
-import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
+import de.asteromania.groehl.bloodpressurediary.database.UserDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.domain.InformationType;
 import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
 public class MainView extends AppCompatActivity {
 
-    DatabaseAccess database = DatabaseService.getDatabaseAccess();
-    UserDataAccess userData = DatabaseService.getUserDataAccess();
+    DataItemDatabaseAccess database = DatabaseService.getDataItemDatabaseAccess();
+    UserDatabaseAccess userData = DatabaseService.getUserDataAccess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

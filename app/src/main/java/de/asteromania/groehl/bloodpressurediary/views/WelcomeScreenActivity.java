@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import de.asteromania.groehl.bloodpressurediary.R;
 
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

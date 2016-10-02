@@ -18,7 +18,7 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 import de.asteromania.groehl.bloodpressurediary.domain.InformationType;
 import de.asteromania.groehl.bloodpressurediary.layout.DataItemListAdapter;
 
-public class MainView extends AppCompatActivity {
+public class MainViewActivity extends AppCompatActivity {
 
     private DatabaseService databaseService;
     private List<DataItemType> trackedDataItemTypes;
@@ -42,7 +42,7 @@ public class MainView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainView.this, AddDataItemChoser.class));
+                startActivity(new Intent(MainViewActivity.this, AddDataItemChoserActivity.class));
             }
         });
     }
@@ -70,7 +70,7 @@ public class MainView extends AppCompatActivity {
         switch(id)
         {
         case R.id.action_add:
-            startActivity(new Intent(this, AddDataItemChoser.class));
+            startActivity(new Intent(this, AddDataItemChoserActivity.class));
             return true;
         case R.id.action_export:
             startActivity(new Intent(this, ExportActivity.class));

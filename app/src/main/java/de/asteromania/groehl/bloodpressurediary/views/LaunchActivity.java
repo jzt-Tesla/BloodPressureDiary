@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
-import de.asteromania.groehl.bloodpressurediary.database.UserDatabaseAccess;
 
 public class LaunchActivity extends AppCompatActivity {
 
@@ -24,12 +23,12 @@ public class LaunchActivity extends AppCompatActivity {
         if(databaseService.getUserDataAccess().dataAvailable())
         {
             Log.i(TAG, "Starting main view.");
-            startActivity(new Intent(this, MainView.class));
+            startActivity(new Intent(this, MainViewActivity.class));
         }
         else
         {
             Log.i(TAG, "Starting welcome screen.");
-            startActivity(new Intent(this, WelcomeScreen.class));
+            startActivity(new Intent(this, WelcomeScreenActivity.class));
         }
 
         finish();

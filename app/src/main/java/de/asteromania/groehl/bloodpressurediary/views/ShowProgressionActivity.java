@@ -1,8 +1,11 @@
 package de.asteromania.groehl.bloodpressurediary.views;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
@@ -15,7 +18,6 @@ import java.util.List;
 import java.util.Locale;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
@@ -32,12 +34,8 @@ public class ShowProgressionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_progression);
-
         databaseService = new DatabaseService(this);
-
         setupView();
-
     }
 
     @Override
@@ -48,9 +46,10 @@ public class ShowProgressionActivity extends AppCompatActivity {
 
     private void setupView() {
 
+        setContentView(R.layout.activity_show_progression);
         String extraString = getIntent().getStringExtra(EXTRA);
 
-        DataItemType currentType = DataItemType.valueOf(extraString);
+        final DataItemType currentType = DataItemType.valueOf(extraString);
 
         if (currentType == null) {
             finish();
@@ -85,6 +84,26 @@ public class ShowProgressionActivity extends AppCompatActivity {
             graph.getViewport().setMaxY(databaseService.getDataItemDatabaseAccess().getMaximumValue(currentType)+ GRAPH_MARGIN);
             break;
         }
+
+        Button buttonAdd = (Button) findViewById(R.id.addFromProgressionView);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowProgressionActivity.this, AddDataItemActivity.class);
+                intent.putExtra(AddDataItemActivity.EXTRA, currentType.toString());
+                startActivity(intent);
+            }
+        });
+
+        Button buttonInfo = (Button) findViewById(R.id.infoFromProgressionView);
+        buttonInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowProgressionActivity.this, InfoActivity.class);
+                intent.putExtra(InfoActivity.EXTRA, currentType.getInformationType().toString());
+                startActivity(intent);
+            }
+        });
 
 
     }

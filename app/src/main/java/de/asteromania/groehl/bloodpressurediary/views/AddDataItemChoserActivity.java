@@ -11,10 +11,9 @@ import android.widget.LinearLayout;
 
 import de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
-import de.asteromania.groehl.bloodpressurediary.database.UserDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
-public class AddDataItemChoser extends AppCompatActivity {
+public class AddDataItemChoserActivity extends AppCompatActivity {
 
     private DatabaseService databaseService;
 
@@ -56,8 +55,8 @@ public class AddDataItemChoser extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddDataItemChoser.this, AddDataItem.class);
-                intent.putExtra(AddDataItem.EXTRA, type.toString());
+                Intent intent = new Intent(AddDataItemChoserActivity.this, AddDataItemActivity.class);
+                intent.putExtra(AddDataItemActivity.EXTRA, type.toString());
                 startActivity(intent);
                 finish();
             }

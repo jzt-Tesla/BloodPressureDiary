@@ -9,10 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.MainView"
+            android:name=".views.MainViewActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".views.AddDataItem"
+        <activity android:name=".views.AddDataItemActivity"
             android:label="@string/activity_add_data_item"/>
         <activity android:name=".views.LaunchActivity">
             <intent-filter>
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.WelcomeScreen"
+        <activity android:name=".views.WelcomeScreenActivity"
             android:label="@string/activity_welcome"/>
         <activity android:name=".views.SettingsActivity"
             android:label="@string/activity_settings"/>
@@ -31,7 +31,7 @@
             android:label="@string/activity_export"/>
         <activity android:name=".views.ShowProgressionActivity"
             android:label="@string/activity_progression"/>
-        <activity android:name=".views.AddDataItemChoser"
+        <activity android:name=".views.AddDataItemChoserActivity"
             android:label="@string/activity_data_item_choser"/>
     </application>
 

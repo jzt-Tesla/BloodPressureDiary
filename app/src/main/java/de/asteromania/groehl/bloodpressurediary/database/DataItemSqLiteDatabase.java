@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
@@ -47,28 +50,41 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
     @Override
     public Collection<? extends DataItem> getAllItemsByType(DataItemType type)
     {
-        return getLastNItemsByType(Integer.MAX_VALUE, type);
+        return getLastNDataItems(Integer.MAX_VALUE, type, false);
     }
 
     @Override
     public Collection<? extends DataItem> getLastNItemsByType(int n, DataItemType type)
     {
+        return getLastNDataItems(n, type, true);
+    }
+
+    @NonNull
+    private Collection<? extends DataItem> getLastNDataItems(int n, DataItemType type, boolean groupByDate) {
         SQLiteDatabase db = dataItemDbHelper.getReadableDatabase();
 
-        String nameOfFirstRow = "AVG("+DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE+")";
+        String nameOfFirstRow = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE;
 
+        if(groupByDate)
+            nameOfFirstRow = "AVG("+ DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE+")";
+
+        String dateRow = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE;
+        
         String[] projection = {
                 nameOfFirstRow,
-                DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE,
+                dateRow,
                 DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE
         };
 
         String selection = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE + " = ?";
         String[] selectionArgs = { type.toString() };
-        String groupByArgs = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DAY_DATE;
+
+        String groupByArgs = null;
+        if(groupByDate)
+         groupByArgs = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DAY_DATE;
 
         String sortOrder =
-                DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE + " ASC";
+                DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE + " DESC";
 
         Cursor c = db.query(
                 DataItemDatabaseContract.DataItemColumns.TABLE_NAME,                     // The table to query
@@ -77,7 +93,8 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
                 selectionArgs,                            // The values for the WHERE clause
                 groupByArgs,                              // don't group the rows
                 null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
+                sortOrder      ,                          // The sort order
+                String.valueOf(n)                         // row limit
         );
 
         ArrayList<DataItem> dataItems = new ArrayList<>(c.getCount());
@@ -87,9 +104,21 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
         {
             dataItems.add(new DataItem(DataItemType.valueOf(c.getString(c.getColumnIndexOrThrow(DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE))),
                     c.getDouble(c.getColumnIndexOrThrow(nameOfFirstRow)) ,
-                    c.getLong(c.getColumnIndexOrThrow(DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE)) ));
+                    c.getLong(c.getColumnIndexOrThrow(dateRow)) ));
             index++;
         }
+
+        Collections.sort(dataItems, new Comparator<DataItem>() {
+            @Override
+            public int compare(DataItem o1, DataItem o2) {
+                if(o1.getDate()>o2.getDate())
+                    return 1;
+                else if(o1.getDate() < o2.getDate())
+                    return -1;
+                else
+                    return 0;
+            }
+        });
 
         return dataItems;
     }
@@ -104,7 +133,7 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
 
         for(DataItemType type : trackedDataItemTypes)
         {
-            ListViewItem item = calculateListViewItem(((List<DataItem>) getLastNItemsByType(NUMBER_OF_FLOATING_ITEMS, type)));
+            ListViewItem item = calculateListViewItem(((List<DataItem>) getLastNDataItems(NUMBER_OF_FLOATING_ITEMS, type, false)));
             if(item != null)
                 returnList.add(item);
         }
@@ -156,8 +185,7 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
     public double getMaximumValue(DataItemType type)
     {
         SQLiteDatabase db = dataItemDbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT MAX("+ DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE+") " +
-                "FROM "+DataItemDatabaseContract.DataItemColumns.TABLE_NAME, null);
+        Cursor c = db.rawQuery(getMinMaxQuery("MAX", DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE, type), null);
         if(c.moveToFirst())
         {
             return c.getDouble(0);
@@ -170,8 +198,7 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
     public double getMinimumDate(DataItemType type)
     {
         SQLiteDatabase db = dataItemDbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT MIN("+ DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE+") " +
-                "FROM "+DataItemDatabaseContract.DataItemColumns.TABLE_NAME, null);
+        Cursor c = db.rawQuery(getMinMaxQuery("MIN", DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE, type), null);
         if(c.moveToFirst())
         {
             return c.getDouble(0);
@@ -184,13 +211,19 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
     public double getMaximumDate(DataItemType type)
     {
         SQLiteDatabase db = dataItemDbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT MAX("+ DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE+") " +
-                "FROM "+DataItemDatabaseContract.DataItemColumns.TABLE_NAME, null);
+        Cursor c = db.rawQuery(getMinMaxQuery("MAX", DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE, type), null);
         if(c.moveToFirst())
         {
             return c.getDouble(0);
         } else {
             return 0;
         }
+    }
+
+    @NonNull
+    private String getMinMaxQuery(String minMaxAvg, String columnName, DataItemType type) {
+        return "SELECT "+minMaxAvg+"("+ columnName +") " +
+                "FROM  (SELECT "+columnName + " FROM " +DataItemDatabaseContract.DataItemColumns.TABLE_NAME +
+                " WHERE " + DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE + "='" + type.toString() + "')";
     }
 }

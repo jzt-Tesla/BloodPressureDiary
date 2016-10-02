@@ -18,9 +18,9 @@ import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
-public class AddDataItem extends AppCompatActivity {
+public class AddDataItemActivity extends AppCompatActivity {
 
-    public static final String EXTRA = "de.asteromania.groehl.bloodpressurediary.AddDataItem.EXTRA";
+    public static final String EXTRA = "de.asteromania.groehl.bloodpressurediary.AddDataItemActivity.EXTRA";
     private static final int MAX_NUMBER_VALUE = 299;
     private static final int MIN_NUMBER_VALUE = 1;
     private static final int NUMBER_VALUE = 100;

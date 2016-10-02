@@ -3,13 +3,11 @@ package de.asteromania.groehl.bloodpressurediary.layout;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,11 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import  de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
-import de.asteromania.groehl.bloodpressurediary.views.AddDataItem;
-import de.asteromania.groehl.bloodpressurediary.views.AddDataItemChoser;
-import de.asteromania.groehl.bloodpressurediary.views.InfoActivity;
 import de.asteromania.groehl.bloodpressurediary.views.ShowProgressionActivity;
 
 /**

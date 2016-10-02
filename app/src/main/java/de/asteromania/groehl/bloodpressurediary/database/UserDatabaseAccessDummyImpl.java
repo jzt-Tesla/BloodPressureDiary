@@ -57,12 +57,12 @@ public class UserDatabaseAccessDummyImpl implements UserDatabaseAccess
     }
 
     @Override
-    public double getCurrentFloatingMean(DataItemType dataItemType) {
-        return 130;
+    public String getName() {
+        return "Max Mustermann";
     }
 
     @Override
-    public void setCurrentFloatingMean(DataItemType dataItemType, double floatingMean) {
+    public void setName(String name) {
 
     }
 }

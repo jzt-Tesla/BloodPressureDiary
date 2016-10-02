@@ -69,7 +69,7 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
             nameOfFirstRow = "AVG("+ DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE+")";
 
         String dateRow = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE;
-        
+
         String[] projection = {
                 nameOfFirstRow,
                 dateRow,

@@ -18,7 +18,7 @@ public final class DatabaseService {
     public DatabaseService(Context context)
     {
         dataItemDatabaseAccess = new DataItemSqLiteDatabase(context);
-        userDatabaseAccess = new UserDatabaseAccessDummyImpl();
+        userDatabaseAccess = new UserDatabaseFileImplementation(context);
     }
 
     public DataItemDatabaseAccess getDataItemDatabaseAccess()
@@ -26,7 +26,7 @@ public final class DatabaseService {
        return dataItemDatabaseAccess;
     }
 
-    public  UserDatabaseAccess getUserDataAccess()
+    public UserDatabaseAccess getUserDataAccess()
     {
         return userDatabaseAccess;
     }

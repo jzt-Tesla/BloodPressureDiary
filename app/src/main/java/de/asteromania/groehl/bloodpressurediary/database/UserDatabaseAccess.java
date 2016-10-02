@@ -52,17 +52,7 @@ public interface UserDatabaseAccess
      */
     void setTrackedValues(List<DataItemType> trackedValues);
 
-    /**
-     *
-     * @param dataItemType
-     * @return
-     */
-    double getCurrentFloatingMean(DataItemType dataItemType);
+    String getName();
 
-    /**
-     *
-     * @param dataItemType
-     * @param floatingMean
-     */
-    void setCurrentFloatingMean(DataItemType dataItemType, double floatingMean);
+    void setName(String name);
 }

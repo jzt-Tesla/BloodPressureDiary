@@ -60,7 +60,7 @@ public class DataItemListAdapter extends BaseAdapter
     public View getView(final int position, final View convertView, ViewGroup parent) {
         Log.i(TAG, "Called getView");
         View rowView;
-        rowView = inflater.inflate(R.layout.layout_data_item, null);
+        rowView = inflater.inflate(R.layout.list_layout_mean_data_item, null);
         TextView text =(TextView) rowView.findViewById(R.id.textViewDataItemText);
         TextView value =(TextView) rowView.findViewById(R.id.textViewDataItemValue);
         ImageView trendIcon=(ImageView) rowView.findViewById(R.id.imageViewTrend);

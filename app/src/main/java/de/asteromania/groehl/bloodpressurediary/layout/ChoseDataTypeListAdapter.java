@@ -81,7 +81,7 @@ public class ChoseDataTypeListAdapter extends BaseAdapter
             @Override
             public void onClick(View v)
             {
-                updateSelectedDataItems(getItem(position), cb);
+                updateSelectedDataItems(position, getItem(position), cb);
             }
         });
 
@@ -91,17 +91,30 @@ public class ChoseDataTypeListAdapter extends BaseAdapter
             public void onClick(View v)
             {
                 cb.setChecked(!cb.isChecked());
-                updateSelectedDataItems(getItem(position), cb);
+                updateSelectedDataItems(position, getItem(position), cb);
             }
         });
         return rowView;
     }
 
-    private void updateSelectedDataItems(DataItemType type, CheckBox cb) {
-        if(cb.isChecked() && !selectedDataItems.contains(type))
-            selectedDataItems.add(type);
-        else if(!cb.isChecked() && selectedDataItems.contains(type))
-            selectedDataItems.remove(type);
+    private void updateSelectedDataItems(int position, DataItemType type, CheckBox cb) {
+
+        if(cb.isChecked() && !selectedDataItems.contains(type)) {
+            if(position==0) {
+                selectedDataItems.add(DataItemType.SYSTOLE);
+                selectedDataItems.add(DataItemType.DIASTOLE);
+            }
+            else
+                selectedDataItems.add(type);
+        }
+        else if(!cb.isChecked() && selectedDataItems.contains(type)) {
+            if(position==0) {
+                selectedDataItems.remove(DataItemType.SYSTOLE);
+                selectedDataItems.remove(DataItemType.DIASTOLE);
+            }
+            else
+                selectedDataItems.remove(type);
+        }
     }
 
     public List<DataItemType> getSelectedDataItems()

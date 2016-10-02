@@ -15,9 +15,9 @@ import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
 public class UserDatabaseFileImplementation implements UserDatabaseAccess {
 
-    private static String FILE_HEIGHT = "firstLogin";
-    private static String FILE_BIRTHDATE = "firstLogin";
-    private static String FILE_NAME = "firstLogin";
+    private static String FILE_HEIGHT = "height";
+    private static String FILE_BIRTHDATE = "birthdate";
+    private static String FILE_NAME = "name";
     private static String FILE_TRACKED_VALUES = "trackedValues";
     private static String SEPARATOR_TRACKED_VALUE = ",";
 
@@ -51,7 +51,7 @@ public class UserDatabaseFileImplementation implements UserDatabaseAccess {
 
     @Override
     public Date getBirthdate() {
-        String result = FileService.readFromFile(FILE_HEIGHT, context);
+        String result = FileService.readFromFile(FILE_BIRTHDATE, context);
         if(result!=null)
             return new Date(Long.valueOf(result));
         else
@@ -95,7 +95,7 @@ public class UserDatabaseFileImplementation implements UserDatabaseAccess {
     @Override
     public String getName()
     {
-        String result = FileService.readFromFile(FILE_HEIGHT, context);
+        String result = FileService.readFromFile(FILE_NAME, context);
         if(result!=null)
             return result;
         else
@@ -105,6 +105,6 @@ public class UserDatabaseFileImplementation implements UserDatabaseAccess {
     @Override
     public void setName(String name)
     {
-        FileService.writeToFile(FILE_NAME, String.valueOf(name), context);
+        FileService.writeToFile(FILE_NAME, name, context);
     }
 }

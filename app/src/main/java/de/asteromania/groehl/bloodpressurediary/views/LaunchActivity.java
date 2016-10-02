@@ -28,7 +28,7 @@ public class LaunchActivity extends AppCompatActivity {
         else
         {
             Log.i(TAG, "Starting welcome screen.");
-            startActivity(new Intent(this, WelcomeScreenActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
         finish();

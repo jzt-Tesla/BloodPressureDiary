@@ -92,9 +92,9 @@ public class DataItemDatabaseAccessDummyImpl implements DataItemDatabaseAccess
                 double ratio = typeList.get(typeList.size()-1).getValue() / typeList.get(typeList.size()-2).getValue();
                 Log.i(TAG, ""+ratio);
                 if (ratio > 1)
-                    trend = DataItemTrend.NEGATIVE;
+                    trend = DataItemTrend.INCREASING;
                 else if(ratio < 1)
-                    trend  = DataItemTrend.POSITIVE;
+                    trend  = DataItemTrend.DECREASING;
             }
             returnList.add(new ListViewItem(type, mean, trend));
         }

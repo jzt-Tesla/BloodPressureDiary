@@ -171,11 +171,11 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
 
         if(sumOfDifferences/mean>0.05)
         {
-            trend = DataItemTrend.NEGATIVE;
+            trend = DataItemTrend.INCREASING;
         }
         else if(sumOfDifferences/mean < -0.05)
         {
-            trend = DataItemTrend.POSITIVE;
+            trend = DataItemTrend.DECREASING;
         }
 
         return new ListViewItem(dataItems.get(0).getItemType(), ((int) (mean*10))/10.0, trend);

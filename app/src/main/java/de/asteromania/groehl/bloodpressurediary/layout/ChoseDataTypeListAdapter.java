@@ -75,7 +75,7 @@ public class ChoseDataTypeListAdapter extends BaseAdapter
         typeIcon.setImageResource(getItem(position).getTypeIcon());
 
         final CheckBox cb = (CheckBox) rowView.findViewById(R.id.checkboxTrackDataItemType);
-
+        cb.setChecked(selectedDataItems.contains(getItem(position)));
         cb.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -122,4 +122,9 @@ public class ChoseDataTypeListAdapter extends BaseAdapter
         return  selectedDataItems;
     }
 
+    public void setTrackedDataItemTypes(List<DataItemType> trackedDataItemTypes) {
+        if(trackedDataItemTypes!=null) {
+            selectedDataItems.addAll(trackedDataItemTypes);
+        }
+    }
 }

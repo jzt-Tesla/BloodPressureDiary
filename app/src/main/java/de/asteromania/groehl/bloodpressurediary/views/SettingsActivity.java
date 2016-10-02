@@ -49,6 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
             Calendar birthdate = Calendar.getInstance();
             birthdate.setTime(databaseService.getUserDataAccess().getBirthdate());
             birthday.updateDate(birthdate.get(Calendar.YEAR), birthdate.get(Calendar.MONTH), birthdate.get(Calendar.DAY_OF_MONTH));
+            listAdapter.setTrackedDataItemTypes(databaseService.getUserDataAccess().getTrackedValues());
         }
 
         Button submitButton = (Button) findViewById(R.id.buttonSubmitData);

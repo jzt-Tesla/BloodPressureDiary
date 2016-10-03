@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Blutdruck Tagebuch</string>
+    <string name="action_add">Hinzufügen</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="action_confirm">Bestätigen</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_edit">Bearbeiten</string>
+    <string name="action_export">Exportieren</string>
+    <string name="action_info">Infos</string>
+    <string name="action_print">Drucken</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="activity_add_data_item">Messung hinzufügen</string>
+    <string name="activity_data_item_choser">Messung auswählen</string>
+    <string name="activity_edit_data_items">Daten bearbeiten</string>
+    <string name="activity_export">Exportieren</string>
+    <string name="activity_info">Informationsansicht</string>
+    <string name="activity_progression">Übersicht</string>
+    <string name="activity_settings">Einstellungen</string>
+    <string name="addValue">Füge %s hinzu</string>
+    <string name="birthday">Geburtstag:</string>
+    <string name="bpSeperator">/</string>
+    <string name="dataTypeBloodPressure">Blutdruck</string>
+    <string name="dataTypeDiastole">Diastole</string>
+    <string name="dataTypeHeartRate">Puls</string>
+    <string name="dataTypeSystole">Systole</string>
+    <string name="dataTypeWeight">Gewicht</string>
+    <string name="date_and_time">Datum und Uhrzeit:</string>
+    <string name="dialog_delete_message">Sind Sie sich sicher, dass Sie den ausgewählen Eintrag entfernen wollen?</string>
+    <string name="dialog_delete_title">Eintrag löschen</string>
+    <string name="dot">.</string>
+    <string name="enterPersonalData">Persönliche Daten:</string>
+    <string name="imageSaveResult">Bild erfolgreich gespeichert in: %s</string>
+    <string name="imageViewTrend">Bild, welches den aktuellen Trand anzeigt</string>
+    <string name="name">Name:</string>
+    <string name="oops">Upps..</string>
+    <string name="settingsText">Bearbeiten Sie ihr\\nBlutdruck Tagebuch</string>
+    <string name="size">Größe:</string>
+    <string name="unit_bloodPressure">mmHg</string>
+    <string name="unit_heartrate">bpm</string>
+    <string name="unit_height">cm</string>
+    <string name="unit_weight">kg</string>
+    <string name="valuesToTrack">Zu beobachtende Parameter:</string>
+</resources>

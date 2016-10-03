@@ -137,6 +137,11 @@ public class DataItemDatabaseAccessDummyImpl implements DataItemDatabaseAccess
         return max;
     }
 
+    @Override
+    public void deleteDataItem(DataItem item) {
+        dataItems.get(item.getItemType()).remove(item);
+    }
+
     private long getDate(int year, int month, int day, int hour, int minute) {
         Calendar c = Calendar.getInstance();
         c.set(year, month, day, hour, minute);

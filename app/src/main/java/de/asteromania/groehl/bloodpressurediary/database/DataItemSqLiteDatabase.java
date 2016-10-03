@@ -220,6 +220,16 @@ public class DataItemSqLiteDatabase implements DataItemDatabaseAccess {
         }
     }
 
+    @Override
+    public void deleteDataItem(DataItem item) {
+        SQLiteDatabase db = dataItemDbHelper.getWritableDatabase();
+        String where = DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATA_TYPE + " = ? AND " +
+                DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_VALUE + " = ? AND " +
+                DataItemDatabaseContract.DataItemColumns.COLUMN_NAME_DATE + " = ? ";
+        String[] whereArgs = {item.getItemType().toString(), String.valueOf(item.getValue()), String.valueOf(item.getDate())};
+        db.delete(DataItemDatabaseContract.DataItemColumns.TABLE_NAME,  where, whereArgs);
+    }
+
     @NonNull
     private String getMinMaxQuery(String minMaxAvg, String columnName, DataItemType type) {
         return "SELECT "+minMaxAvg+"("+ columnName +") " +

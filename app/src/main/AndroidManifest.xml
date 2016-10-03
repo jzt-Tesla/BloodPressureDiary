@@ -31,6 +31,8 @@
             android:label="@string/activity_progression"/>
         <activity android:name=".views.AddDataItemChoserActivity"
             android:label="@string/activity_data_item_choser"/>
+        <activity android:name=".views.EditDataItemsActivity"
+            android:label="@string/activity_edit_data_items"/>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

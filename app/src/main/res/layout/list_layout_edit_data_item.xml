@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:paddingTop="5sp"
+    android:paddingBottom="5sp">
+
+    <TextView
+        android:id="@+id/textViewEditDataItemNumber"
+        android:layout_gravity="center"
+        android:layout_width="50sp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normalTextSize"
+        android:text="@string/dot"
+        />
+
+    <TextView
+        android:id="@+id/textViewEditDataItemValue"
+        android:layout_gravity="center"
+        android:layout_width="70sp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normalTextSize"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="@string/oops"
+        android:layout_marginLeft="2sp"
+        android:layout_marginStart="2sp"
+        android:layout_marginRight="2sp"
+        android:layout_marginEnd="2sp"
+        android:background="@drawable/border"
+        android:padding="5sp" />
+
+    <TextView
+        android:id="@+id/textViewEditDataItemDate"
+        android:layout_gravity="center"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normalTextSize"
+        android:textStyle="bold"
+        android:text="@string/oops"
+        android:layout_marginLeft="2sp"
+        android:layout_marginStart="2sp"
+        android:layout_marginRight="2sp"
+        android:layout_marginEnd="2sp"
+        android:padding="5sp" />
+
+    <Button
+        android:id="@+id/butonEditDataItemEdit"
+        android:contentDescription="@string/imageViewTrend"
+        android:layout_gravity="center"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginStart="5sp"
+        android:background="@android:drawable/ic_menu_edit" />
+
+    <Button
+        android:id="@+id/butonEditDataItemDelete"
+        android:contentDescription="@string/imageViewTrend"
+        android:layout_gravity="center"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginStart="5sp"
+        android:background="@android:drawable/ic_delete" />
+
+</LinearLayout>

@@ -59,4 +59,10 @@ public interface DataItemDatabaseAccess
      * @return
      */
     double getMaximumDate(DataItemType type);
+
+    /**
+     *
+     * @param item
+     */
+    void deleteDataItem(DataItem item);
 }

@@ -17,6 +17,10 @@
         android:layout_height="200sp"
         android:id="@+id/graphProgression" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,10 +38,16 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/editFromProgressionView"
+            android:text="@string/action_edit"
+            android:layout_marginRight="24sp"
+            android:layout_marginEnd="24sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/infoFromProgressionView"
-            android:text="@string/action_info"
-            android:layout_marginLeft="24sp"
-            android:layout_marginStart="24sp"/>
+            android:text="@string/action_info"/>
 
     </LinearLayout>
 

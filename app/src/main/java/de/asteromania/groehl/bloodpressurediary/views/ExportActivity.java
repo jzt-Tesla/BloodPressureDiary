@@ -5,9 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,12 +37,14 @@ public class ExportActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if(hasFocus) {
-            takeScreenshot();
+            String result = takeScreenshot();
+            if(result!=null)
+                Toast.makeText(this, getString(R.string.imageSaveResult, result), Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
-    public void takeScreenshot()
+    public String takeScreenshot()
     {
         LinearLayout rootView = (LinearLayout) findViewById(R.id.exportScreenshotView);
         int width = rootView.getMeasuredWidth();
@@ -49,15 +53,15 @@ public class ExportActivity extends AppCompatActivity {
         Canvas c = new Canvas(b);
         c.drawColor(Color.WHITE);
         rootView.draw(c);
-        saveBitmap(b);
+        return saveBitmap(b);
     }
 
-    private void saveBitmap(Bitmap bitmap)
+    private String saveBitmap(Bitmap bitmap)
     {
         if(bitmap==null)
         {
             Log.w(TAG, "Bitmap was null");
-            return;
+            return null;
         }
         String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
 
@@ -82,11 +86,14 @@ public class ExportActivity extends AppCompatActivity {
                 Log.i(TAG, "Saved PNG in folder: " + file.getAbsolutePath());
             else
                 Log.w(TAG, "Saving PNG in " + file.getAbsolutePath() + " failed.");
+
         } catch (FileNotFoundException e) {
             Log.e(TAG, e.getMessage(), e);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
         }
+
+        return file.getAbsolutePath();
     }
 
 }

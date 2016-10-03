@@ -34,4 +34,5 @@
     <string name="birthday">Birthday:</string>
     <string name="settingsText">Configure your\nBlood Pressure Diary</string>
     <string name="action_edit">Edit</string>
+    <string name="imageSaveResult">Successfully exported image to %s</string>
 </resources>

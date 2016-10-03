@@ -1,23 +1,13 @@
 package de.asteromania.groehl.bloodpressurediary.views;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,17 +16,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.domain.InformationType;
 
 public class ExportActivity extends AppCompatActivity {
 
     private static final String FOLDER_NAME = "BloodPressureDiary";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy_HH.mm.ss", Locale.getDefault());
     private static final String TAG = "ExportActivity";
-    public static final Paint PAINT = new Paint();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

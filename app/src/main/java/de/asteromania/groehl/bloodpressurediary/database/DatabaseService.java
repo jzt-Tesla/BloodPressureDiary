@@ -2,10 +2,6 @@ package de.asteromania.groehl.bloodpressurediary.database;
 
 import android.content.Context;
 
-import java.util.HashMap;
-
-import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
-
 /**
  * Created by jgroehl on 26.09.16.
  */

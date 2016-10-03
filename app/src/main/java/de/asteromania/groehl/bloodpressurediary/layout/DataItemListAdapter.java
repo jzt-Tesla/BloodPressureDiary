@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import  de.asteromania.groehl.bloodpressurediary.R;
+import de.asteromania.groehl.bloodpressurediary.R;
 import de.asteromania.groehl.bloodpressurediary.domain.ListViewItem;
 import de.asteromania.groehl.bloodpressurediary.views.ShowProgressionActivity;
 

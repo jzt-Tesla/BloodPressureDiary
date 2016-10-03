@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;
 
 /**

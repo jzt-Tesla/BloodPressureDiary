@@ -13,7 +13,6 @@ import java.util.Calendar;
 import java.util.Collection;
 
 import de.asteromania.groehl.bloodpressurediary.R;
-import de.asteromania.groehl.bloodpressurediary.database.DataItemDatabaseAccess;
 import de.asteromania.groehl.bloodpressurediary.database.DatabaseService;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItem;
 import de.asteromania.groehl.bloodpressurediary.domain.DataItemType;

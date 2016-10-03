@@ -2,7 +2,6 @@ package de.asteromania.groehl.bloodpressurediary.database;
 
 import android.content.Context;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
